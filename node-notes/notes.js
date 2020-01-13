@@ -40,9 +40,24 @@ const editNote = (title, newTitle) => {
     return false; // note portant le titre recherché non trouvée
 };
 
+const removeNote = (title) => {
+    let notes = fetchNotes();
+
+    // newNotes reçoit uniquement les notes ayant un titre de celui
+    // fourni en entrée de la fonction
+    let newNotes = notes.filter(note => note.title != title);
+
+    saveNote(newNotes); // écrasement du fichier json
+
+    // on retourne le résultat de l'évaluation booléenne
+    // qui compare les longueurs des tableaux
+    return notes.length != newNotes.length;
+
+};
+
 const saveNote = (notes) => {
     fs.writeFileSync('notes-data.json', 
         JSON.stringify(notes))
 };
 
-module.exports = { fetchNotes, addNote, editNote };
+module.exports = { fetchNotes, addNote, editNote, removeNote };
