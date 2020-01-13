@@ -12,7 +12,6 @@ const argv = yargs.command('add', 'Ajouter une note', {
 }).argv;
 
 let cmd = argv._[0];
-//console.log(cmd);
 
 if (cmd == 'list') {
     console.log('*** Liste des notes enregistrées ***');
@@ -20,7 +19,21 @@ if (cmd == 'list') {
     list.forEach(note => {
         console.log(note.title); // lecture la prop title de l'objet note
     })
-
+} else if (cmd == 'add') {
+    let result = notes.addNote(argv.title);
+    if (result) {
+        console.log('=> Note enregistrée');
+    } else {
+        console.log(
+            '=> Enregistrement interdit, le titre ' + argv.title + ' existe déjà');
+    }  
+} else if (cmd == 'edit') {
+    let result = notes.editNote(argv.title, argv.newTitle);
+    if (result) {
+        console.log('=> Note mise à jour');
+    } else {
+        console.log('=> Aucune portant ce titre n\'a été trouvée');
+    }
 }
 
 
