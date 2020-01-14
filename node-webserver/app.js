@@ -27,6 +27,13 @@ app.get('/horaires', (req, res) => {
     res.send(html);
 })
 
+app.get('/logo/juve', (req, res) => {
+    // __dirname renvoie le chemin absolu du répertoire
+    // serveur (là où est situé le fichier app.js)
+    res.sendFile(
+        __dirname + '/static/images/juve-logo.jpg');
+})
+
 app.listen(5000, () => {
     console.log('Server running on port 5000...');
 })

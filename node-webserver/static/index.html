@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index</title>
+</head>
+<body>
+    <h1 id="title">Index</h1>
+    <button id="btnTest">Test</button>
+    <div id="divMessage"></div>
+
+    <img id="img" src="images/img1.png" style="display:none">
+
+    <script>
+    console.log('JS client side');
+
+    // références au DOM
+    var btnTest         = document.getElementById('btnTest');
+    var divMessage      = document.getElementById('divMessage');
+    var title           = document.getElementById('title');
+    var img             = document.getElementById('img');
+    
+    var count = 0;
+
+    // écoute événementielle et détection du clic
+    btnTest.addEventListener('click', () => {
+        //console.log('click');
+        count += 1;
+        divMessage.innerText = count;
+        
+        if (count > 5) title.style.color    = 'yellow';
+        if (count > 10) title.style.color   = 'orange';
+        if (count > 15) {
+            img.style.display = 'none';
+            title.style.color   = 'red';
+        }
+        if (count > 20) title.style.color   = 'blue';
+        if (count > 25) title.style.color   = 'brown';
+        if (count > 30) {
+            img.style.display = 'inline';
+            count = 0;
+        }
+        
+    });
+
+    setInterval(() => {
+        //divMessage.innerHTML += '<p>Ciao</p>';
+        
+    }, 1000) // 1000 ms = 1s
+
+    </script>
+    
+</body>
+</html>
