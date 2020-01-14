@@ -1,4 +1,5 @@
 const express = require('express');
+const teams = require('./teams');
 
 const app = express();
 
@@ -32,6 +33,12 @@ app.get('/logo/juve', (req, res) => {
     // serveur (là où est situé le fichier app.js)
     res.sendFile(
         __dirname + '/static/images/juve-logo.jpg');
+})
+
+app.get('/ajax', (req, res) => {
+    //res.json({ message: 'hello' });
+    var randomIndex = Math.floor(Math.random() * teams.length);
+    res.json(teams[randomIndex]);
 })
 
 app.listen(5000, () => {

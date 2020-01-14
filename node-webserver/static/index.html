@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Index</title>
+    <style>
+    .teamName {
+        color: orange;
+        font-weight: bold;
+        padding-right: 30px;
+    }
+    </style>
 </head>
 <body>
     <h1 id="title">Index</h1>
@@ -47,7 +54,18 @@
 
     setInterval(() => {
         //divMessage.innerHTML += '<p>Ciao</p>';
-        
+        fetch('/ajax')
+            .then(res => res.json())
+            .then(team => {
+                //divMessage.innerHTML += res.message
+                divMessage.innerHTML = `
+                    <div>
+                        <span class="teamName" style="color:#${team.color}">
+                            ${team.name}</span>
+                        <span class="teamCoach">${team.coach}</span>
+                    </div>
+                `;
+            })
     }, 1000) // 1000 ms = 1s
 
     </script>
