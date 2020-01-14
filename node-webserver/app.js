@@ -1,38 +1,32 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
 
-const resBody = "Le serveur a répondu à la requête";
+const app = express();
 
-http
-.createServer((req, res) => {
+// middleware pour gestion des ressources statiques
+app.use(express.static('static'));
 
-    if (req.url == '/') {
-        res.writeHead(200, {'Content-Type':'text/plain'});
-        res.write('Homepage');
-        res.end();
-    } else if (req.url.indexOf('login') != -1) {
-        res.writeHead(200, {'Content-Type':'text/plain'});
-        res.write('login string found in url');
-        res.end();
-    } else if (req.url == '/horaires') {
-        res.writeHead(200, {
-            'Content-Type':'text/html',
-            'X-Header-Test':'Info perso'
-        });
-        fs.readFile('./static/horaires.html', (err, data) => {
-            if (err) console.log(err);
-            res.end(data);
-        });
-    } else if (req.url == '/styles.css') {
-        res.writeHead(200, {'Content-Type':'text/css'});
-        fs.readFile('./static/styles.css', (err, data) => {
-            if (err) console.log(err);
-            res.end(data);
-        });
-    } else {
-        res.end();
-    }
+const title = "Horaires piscine";
 
-    //res.end();
+// table de routage
+app.get('/', (req, res) => {
+    res.send('<i>Homepage</i>');
 })
-.listen(5000);
+
+app.get('/horaires', (req, res) => {
+    let html = `
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>${title}</title>
+        </head>
+        <body>
+            <h1>${title}</h1>
+        </body>
+    </html>
+    `;
+    res.send(html);
+})
+
+app.listen(5000, () => {
+    console.log('Server running on port 5000...');
+})
