@@ -1,0 +1,11 @@
+CD9 - Nodejs - Christophe DUFOUR
+lundi -> mercredi (3 jours)
+J1 : intro, app "node-notes"
+
+Dépôt Github:
+https://github.com/cdufour/cda9-nodejs
+
+
+** changement mot de passe sql **
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'aston'
+flush privileges;

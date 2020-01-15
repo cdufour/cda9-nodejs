@@ -48,7 +48,9 @@ app.get('/ajax', (req, res) => {
 })
 
 app.post('/translate', (req, res) => {
-    var result = dico.getTranslation(req.body.word, req.body.lang);
+    //var result = dico.getTranslation(req.body.word, req.body.lang);
+    var { word, lang } = req.body;
+    var result = dico.getTranslation(word, lang);
     res.json({ result });
 })
 

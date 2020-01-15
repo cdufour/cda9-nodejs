@@ -1,0 +1,7 @@
+*** EXOS node-webserver ***
+
+- Ajouter img1.png et img2.png à la page horaires.html
+
+- Ajouter une propriété color aux objets teams
+la valeur associée à cette clé sera utilisée en front pour styliser le 
+nom de l'équipe lors de son affichage
