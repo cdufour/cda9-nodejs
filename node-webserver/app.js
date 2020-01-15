@@ -1,10 +1,16 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const teams = require('./teams');
+const dico = require('./dico');
 
 const app = express();
 
 // middleware pour gestion des ressources statiques
 app.use(express.static('static'));
+
+// middleware pour le parsing du json contenu dans req.body 
+// (requêtes en POST)
+app.use(bodyParser.json());
 
 const title = "Horaires piscine";
 
@@ -39,6 +45,11 @@ app.get('/ajax', (req, res) => {
     //res.json({ message: 'hello' });
     var randomIndex = Math.floor(Math.random() * teams.length);
     res.json(teams[randomIndex]);
+})
+
+app.post('/translate', (req, res) => {
+    var result = dico.getTranslation(req.body.word, req.body.lang);
+    res.json({ result });
 })
 
 app.listen(5000, () => {

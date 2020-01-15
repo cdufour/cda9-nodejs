@@ -10,15 +10,50 @@
     <h1>Form</h1>
 
     <input id="word" type="text">
-    <button id="btnSend">Envoyer</button>
+    <select id="selectLang">
+        <option value="0">Choisir une langue</option>
+        <option value="en">Anglais</option>
+        <option value="it">Italien</option>
+        <option value="ro">Roumain</option>
+    </select>
+    <button id="btnSend" disabled>Traduire</button>
+    <div id="divMessage"></div>
 
     <script>
     
-    var word    = document.getElementById('word');
-    var btnSend = document.getElementById('btnSend');
-
+    // références au DOM
+    var word            = document.getElementById('word');
+    var btnSend         = document.getElementById('btnSend');
+    var selectLang      = document.getElementById('selectLang');
+    var divMessage      = document.getElementById('divMessage');
+    
+    // écouteurs d'événements
     btnSend.addEventListener('click', () => {
-        console.log(word.value);
+        var data = { 
+            word: word.value,
+            lang: selectLang.value
+        };
+        fetch('/translate', { 
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }, 
+            method: 'POST',
+            body: JSON.stringify(data) })
+            .then(res => res.json())
+            .then(res => {
+                divMessage.innerText = 
+                    res.result ? res.result : 'Aucune traduction trouvée';
+            })
+    })
+
+    selectLang.addEventListener('change', (e) => {
+        // e.target = élément du DOM à l'origine de l'événement
+        // e.target = selectLang
+        var option = e.target.value;
+        // bouton désactivé si aucune langue n'est choisie
+        btnSend.disabled = option == '0';
+
     })
 
     </script>
