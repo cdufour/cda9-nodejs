@@ -5,3 +5,9 @@
 - Ajouter une propriété color aux objets teams
 la valeur associée à cette clé sera utilisée en front pour styliser le 
 nom de l'équipe lors de son affichage
+
+
+*** EXO node-api ***
+Créer un front utilisant l'api
+Une interface html/js permettant:
+- de lister, ajouter, mettre à jour, supprimer
